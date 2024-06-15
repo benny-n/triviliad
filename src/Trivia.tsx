@@ -73,13 +73,23 @@ export default function Trivia() {
       if (ENABLE_ADMIN) {
         setQuestions(query.data.questions);
       } else {
+        let indexOfFirstSunnyQuestion = query.data.questions.findIndex(
+          (question: TriviaQuestion) => question.who === "סאני"
+        );
         setQuestions(
+          // shuffle all the list of questions from 2 to 20, but make sure that 8 and 9 remain adjacent
           query.data.questions
             .slice(0, 2)
             .concat(
-              query.data.questions.slice(2, 20).sort(() => Math.random() - 0.5)
+              query.data.questions.slice(2, 8).sort(() => Math.random() - 0.5)
             )
-            .concat(query.data.questions.slice(20))
+            .concat(query.data.questions.slice(8, 10))
+            .concat(
+              query.data.questions
+                .slice(10, indexOfFirstSunnyQuestion)
+                .sort(() => Math.random() - 0.5)
+            )
+            .concat(query.data.questions.slice(indexOfFirstSunnyQuestion))
         );
       }
       if (currentQuestionIndex < 0) {
@@ -359,6 +369,47 @@ export default function Trivia() {
                 </Button>
               </>
             )}
+            {/* <Box
+              sx={{
+                width: "50%",
+                height: "10px",
+                mt: 2,
+                position: "absolute",
+                bottom: "20px",
+              }}
+            >
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: "10%",
+                  bottom: "20px",
+                }}
+              >
+                🍺
+              </Typography>
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: "30%",
+                  bottom: "20px",
+                }}
+              >
+                🍺🍺
+              </Typography>
+              <Typography
+                sx={{
+                  position: "absolute",
+                  left: "70%",
+                  bottom: "20px",
+                }}
+              >
+                🍺🍺🍺
+              </Typography>
+              <LinearProgress
+                variant="determinate"
+                value={(currentQuestionIndex / questions.length) * 100}
+              />
+            </Box> */}
           </Box>
         )}
       </Box>

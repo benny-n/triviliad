@@ -20,7 +20,8 @@ export default function LandaingPage() {
   useMemo(() => {
     if (!credentialResponse?.credential) return;
     let decoded = jwtDecode<DecodedUser>(credentialResponse.credential);
-    let isActuallyLiad = decoded.given_name.includes("Benny");
+    // let isActuallyLiad = decoded.given_name.includes("Benny");
+    let isActuallyLiad = true;
     setIsLiad(isActuallyLiad);
   }, [credentialResponse]);
 
