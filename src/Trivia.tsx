@@ -20,6 +20,7 @@ interface TriviaQuestion {
   answers: string[];
   who: string;
   photo?: string;
+  hasPhotoAnswer?: boolean;
 }
 
 const indexToLetter = (index: number): string => {
@@ -222,9 +223,15 @@ export default function Trivia() {
                         disabled={answeredQuestion}
                         onClick={() => {
                           setAnsweredQuestion(true);
-                          let newQuestions = [...questions]
-                          newQuestions[currentQuestionIndex].photo = newQuestions[currentQuestionIndex].photo?.replace(".jpg", "_answer.jpg")
-                          setQuestions(newQuestions);
+                          if (questions[currentQuestionIndex].hasPhotoAnswer) {
+                            let newQuestions = [...questions];
+                            newQuestions[currentQuestionIndex].photo =
+                              newQuestions[currentQuestionIndex].photo?.replace(
+                                ".jpg",
+                                "_answer.jpg"
+                              );
+                            setQuestions(newQuestions);
+                          }
                           setAnswer(answer);
                           setTimerOpacity(0);
                           muteAllAudio();
