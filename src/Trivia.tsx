@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import Irur from "./irur";
 
 interface TriviaQuestion {
   question: string;
@@ -353,6 +354,7 @@ export default function Trivia() {
                     >
                       {questions[currentQuestionIndex].who} יגיד לך אם צדקת
                     </Typography>
+                    <Irur answer={answer}></Irur>
                   </>
                 )}
                 <Button
