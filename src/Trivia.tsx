@@ -48,7 +48,7 @@ export default function Trivia() {
     queryFn: async () => {
       const response = await fetch(
         // "https://api.npoint.io/4f83648c8dc8b1c9438a"
-        "backup.json"
+        "trivia.json"
       );
       return response.json();
     },
