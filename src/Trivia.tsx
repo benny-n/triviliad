@@ -69,7 +69,6 @@ export default function Trivia() {
 
   useEffect(() => {
     if (query.isSuccess && questions.length === 0) {
-      console.log(query.data.questions.length);
       if (ENABLE_ADMIN) {
         setQuestions(query.data.questions);
       } else {
@@ -99,7 +98,6 @@ export default function Trivia() {
   }, [query]);
 
   useEffect(() => {
-    console.log(questions);
     if (answeredQuestion) {
       setTimeout(() => {
         setOpacity(1);
@@ -224,6 +222,9 @@ export default function Trivia() {
                         disabled={answeredQuestion}
                         onClick={() => {
                           setAnsweredQuestion(true);
+                          let newQuestions = [...questions]
+                          newQuestions[currentQuestionIndex].photo = newQuestions[currentQuestionIndex].photo?.replace(".jpg", "_answer.jpg")
+                          setQuestions(newQuestions);
                           setAnswer(answer);
                           setTimerOpacity(0);
                           muteAllAudio();
