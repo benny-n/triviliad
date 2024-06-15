@@ -10,8 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@emotion/react": "latest",
+    "@emotion/styled": "latest",
+    "@mui/icons-material": "next",
+    "@mui/material": "next",
+    "@react-oauth/google": "^0.12.1",
+    "@tanstack/react-query": "^5.45.0",
+    "jwt-decode": "^4.0.0",
+    "react": "latest",
+    "react-countdown-circle-timer": "^3.2.1",
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
