@@ -37,7 +37,7 @@ const indexToLetter = (index: number): string => {
   }
 };
 
-const ENABLE_ADMIN = true;
+const ENABLE_ADMIN = false;
 
 export default function Trivia() {
   const theme = useTheme();
@@ -73,7 +73,14 @@ export default function Trivia() {
       if (ENABLE_ADMIN) {
         setQuestions(query.data.questions);
       } else {
-        setQuestions(query.data.questions.sort(() => Math.random() - 0.5));
+        setQuestions(
+          query.data.questions
+            .slice(0, 2)
+            .concat(
+              query.data.questions.slice(2, 20).sort(() => Math.random() - 0.5)
+            )
+            .concat(query.data.questions.slice(20))
+        );
       }
       if (currentQuestionIndex < 0) {
         setCurrentQuestionIndex(0);
@@ -82,6 +89,7 @@ export default function Trivia() {
   }, [query]);
 
   useEffect(() => {
+    console.log(questions);
     if (answeredQuestion) {
       setTimeout(() => {
         setOpacity(1);
