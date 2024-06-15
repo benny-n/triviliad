@@ -1,13 +1,13 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { CredentialResponse, useGoogleOneTapLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
+// import { jwtDecode } from "jwt-decode";
 import { useEffect, useMemo, useState } from "react";
 import Trivia from "./Trivia";
 
-interface DecodedUser {
-  given_name: string;
-}
+// interface DecodedUser {
+//   given_name: string;
+// }
 
 export default function LandaingPage() {
   const [header, setHeader] = useState<string>("האם אתה ליעד?");
@@ -19,7 +19,7 @@ export default function LandaingPage() {
 
   useMemo(() => {
     if (!credentialResponse?.credential) return;
-    let decoded = jwtDecode<DecodedUser>(credentialResponse.credential);
+    // let decoded = jwtDecode<DecodedUser>(credentialResponse.credential);
     // let isActuallyLiad = decoded.given_name.includes("Benny");
     let isActuallyLiad = true;
     setIsLiad(isActuallyLiad);
