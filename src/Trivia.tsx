@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
+import { StatsData } from "./types";
 
 interface TriviaQuestion {
   question: string;
@@ -21,6 +22,7 @@ interface TriviaQuestion {
   who: string;
   photo?: string;
   hasPhotoAnswer?: boolean;
+  correct: number;
 }
 
 const indexToLetter = (index: number): string => {
@@ -40,7 +42,16 @@ const indexToLetter = (index: number): string => {
 
 const ENABLE_ADMIN = false;
 
-export default function Trivia() {
+interface TriviaProps {
+  setIsFinished: (isFinished: boolean) => void;
+  statsData: StatsData;
+  setStatsData: (statsData: StatsData) => void;
+}
+
+export default function Trivia(props: TriviaProps) {
+  const setIsFinished = props.setIsFinished;
+  const statsData = props.statsData;
+  const setStatsData = props.setStatsData;
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const timerSize: number = isSmall ? 90 : 180;
@@ -64,9 +75,28 @@ export default function Trivia() {
   const [isTimerRunning, setIsTimerRunning] = useState(false);
   const [playTicking, setPlayTicking] = useState(false);
   const [playYouLose, setPlayYouLose] = useState(false);
+  const [playYouWin, setPlayYouWin] = useState(false);
   const [displayQuestions, setDisplayQuestions] = useState(false);
 
   const [adminIndex, setAdminIndex] = useState(0);
+
+  const updateStats = (submitter: string, correct: boolean) => {
+    let newStatsData = { ...statsData };
+    // find submitter, or create new entry
+    let submitterIndex = newStatsData.stats.findIndex(
+      (stat) => stat.submitter === submitter
+    );
+    if (submitterIndex === -1) {
+      newStatsData.stats.push({ submitter, total: 0, correctAnswers: 0 });
+      submitterIndex = newStatsData.stats.length - 1;
+    }
+    // update answers
+    newStatsData.stats[submitterIndex].total++;
+    if (correct) {
+      newStatsData.stats[submitterIndex].correctAnswers++;
+    }
+    setStatsData(newStatsData);
+  };
 
   useEffect(() => {
     if (query.isSuccess && questions.length === 0) {
@@ -77,7 +107,7 @@ export default function Trivia() {
           (question: TriviaQuestion) => question.who === "סאני"
         );
         setQuestions(
-          // shuffle all the list of questions from 2 to 20, but make sure that 8 and 9 remain adjacent
+          // shuffle all the list of questions from 2 to Sunny, but make sure that 8 and 9 remain adjacent
           query.data.questions
             .slice(0, 2)
             .concat(
@@ -112,6 +142,7 @@ export default function Trivia() {
     // setPlayAlarm(false);
     setPlayTicking(false);
     setPlayYouLose(false);
+    setPlayYouWin(false);
   };
 
   const toggleAudio = () => {
@@ -127,6 +158,11 @@ export default function Trivia() {
       {playTicking && (
         <audio autoPlay>
           <source src="ahuzon_elion.mp3" type="audio/mpeg" />
+        </audio>
+      )}
+      {playYouWin && (
+        <audio autoPlay>
+          <source src="you_win.wav" type="audio/mpeg" />
         </audio>
       )}
       {playYouLose && (
@@ -235,6 +271,17 @@ export default function Trivia() {
                           setAnswer(answer);
                           setTimerOpacity(0);
                           muteAllAudio();
+                          if (
+                            index === questions[currentQuestionIndex].correct
+                          ) {
+                            setPlayYouWin(true);
+                          } else {
+                            setPlayYouLose(true);
+                          }
+                          updateStats(
+                            questions[currentQuestionIndex].who,
+                            index === questions[currentQuestionIndex].correct
+                          );
                           setTimeout(() => {
                             setTimer(false);
                           }, 350);
@@ -312,6 +359,7 @@ export default function Trivia() {
                         setAnsweredQuestion(true);
                         setAnswer("");
                         setPlayYouLose(true);
+                        updateStats(questions[currentQuestionIndex].who, false);
                       }}
                     >
                       {({ remainingTime }) =>
@@ -325,35 +373,52 @@ export default function Trivia() {
             {answeredQuestion && (
               <>
                 {answer && (
-                  <>
-                    <Typography
-                      variant="h5"
-                      component="h2"
-                      sx={{
-                        mt: 1,
-                        textDecoration: "underline",
-                        opacity: opacity,
-                        transition: "opacity 0.5s ease-in-out",
-                      }}
-                    >
-                      {indexToLetter(
-                        questions[currentQuestionIndex].answers.indexOf(answer)
-                      )}
+                  <Typography
+                    variant="h6"
+                    component="h2"
+                    color={
+                      questions[currentQuestionIndex].answers.indexOf(answer) ==
+                      questions[currentQuestionIndex].correct
+                        ? "success"
+                        : "error"
+                    }
+                    sx={{
+                      mt: 1,
+                      textDecoration: "underline",
+                      opacity: opacity,
+                      transition: "opacity 0.5s ease-in-out",
+                    }}
+                  >
+                    {indexToLetter(
+                      questions[currentQuestionIndex].answers.indexOf(answer)
+                    )}
+                    &nbsp;
+                    {answer}
+                  </Typography>
+                )}
+                {questions[currentQuestionIndex].answers.indexOf(answer) !=
+                  questions[currentQuestionIndex].correct && (
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    sx={{
+                      mt: 2,
+                      opacity: opacity,
+                      transition: "opacity 0.5s ease-in-out",
+                    }}
+                  >
+                    התשובה הנכונה היא:
+                    <br />
+                    <b>
+                      {indexToLetter(questions[currentQuestionIndex].correct)}
                       &nbsp;
-                      {answer}
-                    </Typography>
-                    <Typography
-                      variant="h6"
-                      component="h2"
-                      sx={{
-                        mt: 2,
-                        opacity: opacity,
-                        transition: "opacity 0.5s ease-in-out",
-                      }}
-                    >
-                      {questions[currentQuestionIndex].who} יגיד לך אם צדקת
-                    </Typography>
-                  </>
+                      {
+                        questions[currentQuestionIndex].answers[
+                          questions[currentQuestionIndex].correct
+                        ]
+                      }
+                    </b>
+                  </Typography>
                 )}
                 <Button
                   variant="contained"
@@ -368,9 +433,11 @@ export default function Trivia() {
                     setTimer(false);
                     setTimerOpacity(1);
                     muteAllAudio();
-                    setCurrentQuestionIndex(
-                      (prevIndex) => (prevIndex + 1) % questions.length
-                    );
+                    if (currentQuestionIndex >= questions.length - 1) {
+                      setIsFinished(true);
+                    } else {
+                      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
+                    }
                   }}
                 >
                   שאלה הבאה

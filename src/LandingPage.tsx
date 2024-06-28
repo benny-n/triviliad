@@ -4,6 +4,8 @@ import { CredentialResponse, useGoogleOneTapLogin } from "@react-oauth/google";
 // import { jwtDecode } from "jwt-decode";
 import { useEffect, useMemo, useState } from "react";
 import Trivia from "./Trivia";
+import Stats from "./Stats";
+import { StatsData } from "./types";
 
 // interface DecodedUser {
 //   given_name: string;
@@ -16,6 +18,8 @@ export default function LandaingPage() {
   const [isLiad, setIsLiad] = useState<boolean>(false);
   const [credentialResponse, setCredentialResponse] =
     useState<CredentialResponse | null>();
+  const [triviaComplete, setTriviaComplete] = useState<boolean>(false);
+  const [statsData, setStatsData] = useState<StatsData>({ stats: [] });
 
   useMemo(() => {
     if (!credentialResponse?.credential) return;
@@ -68,6 +72,11 @@ export default function LandaingPage() {
         alignItems: "center",
       }}
     >
+      {triviaComplete && (
+        <audio autoPlay>
+          <source src="complete.mp3" type="audio/mpeg" />
+        </audio>
+      )}
       <Typography
         variant="h2"
         component="h2"
@@ -79,7 +88,17 @@ export default function LandaingPage() {
       >
         {header}
       </Typography>
-      {isReady && isLiad && <Trivia />}
+      {isReady &&
+        isLiad &&
+        (!triviaComplete ? (
+          <Trivia
+            setIsFinished={setTriviaComplete}
+            statsData={statsData}
+            setStatsData={setStatsData}
+          />
+        ) : (
+          <Stats data={statsData} />
+        ))}
     </Box>
   );
 }
