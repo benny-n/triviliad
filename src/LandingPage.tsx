@@ -3,9 +3,6 @@ import Typography from "@mui/material/Typography";
 import { CredentialResponse, useGoogleOneTapLogin } from "@react-oauth/google";
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useMemo, useState } from "react";
-import Trivia from "./Trivia";
-import Stats from "./Stats";
-import { StatsData } from "./types";
 import Redirect from "./Redirect";
 
 interface DecodedUser {
