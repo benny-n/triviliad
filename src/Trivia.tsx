@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 import { StatsData } from "./types";
+import { useNavigate } from "react-router-dom";
 
 interface TriviaQuestion {
   question: string;
@@ -42,16 +43,17 @@ const indexToLetter = (index: number): string => {
 
 const ENABLE_ADMIN = false;
 
-interface TriviaProps {
-  setIsFinished: (isFinished: boolean) => void;
+export interface TriviaProps {
   statsData: StatsData;
   setStatsData: (statsData: StatsData) => void;
+  person: String;
 }
 
 export default function Trivia(props: TriviaProps) {
-  const setIsFinished = props.setIsFinished;
+  let navigate = useNavigate();
   const statsData = props.statsData;
   const setStatsData = props.setStatsData;
+  const person = props.person;
   const theme = useTheme();
   const isSmall = useMediaQuery(theme.breakpoints.down("sm"));
   const timerSize: number = isSmall ? 90 : 180;
@@ -59,8 +61,7 @@ export default function Trivia(props: TriviaProps) {
     queryKey: ["trivia"],
     queryFn: async () => {
       const response = await fetch(
-        // "https://api.npoint.io/4f83648c8dc8b1c9438a"
-        "trivia.json"
+        `${person}_res/trivia.json`
       );
       return response.json();
     },
@@ -157,17 +158,17 @@ export default function Trivia(props: TriviaProps) {
     <Container maxWidth="sm">
       {playTicking && (
         <audio autoPlay>
-          <source src="ahuzon_elion.mp3" type="audio/mpeg" />
+          <source src={`${person}_res/ahuzon_elion.mp3`} type="audio/mpeg" />
         </audio>
       )}
       {playYouWin && (
         <audio autoPlay>
-          <source src="you_win.wav" type="audio/mpeg" />
+          <source src={`${person}_res/you_win.wav`} type="audio/mpeg" />
         </audio>
       )}
       {playYouLose && (
         <audio autoPlay>
-          <source src="you_lose.wav" type="audio/mpeg" />
+          <source src={`${person}_res/you_lose.wav`} type="audio/mpeg" />
         </audio>
       )}
       {ENABLE_ADMIN && (
@@ -225,7 +226,7 @@ export default function Trivia(props: TriviaProps) {
             {questions[currentQuestionIndex].photo && (
               <Paper variant="outlined">
                 <img
-                  src={questions[currentQuestionIndex].photo}
+                  src={`${person}_res/${questions[currentQuestionIndex].photo}`}
                   alt="question"
                   style={{ width: "100%", maxHeight: "250px" }}
                 />
@@ -434,7 +435,7 @@ export default function Trivia(props: TriviaProps) {
                     setTimerOpacity(1);
                     muteAllAudio();
                     if (currentQuestionIndex >= questions.length - 1) {
-                      setIsFinished(true);
+                      navigate("/stats");
                     } else {
                       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
                     }

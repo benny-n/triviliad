@@ -2,6 +2,7 @@ import { ThemeProvider } from "@emotion/react";
 import { CssBaseline } from "@mui/material";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
 import * as React from "react";
 import * as ReactDOM from "react-dom/client";
 import App from "./App";
@@ -15,7 +16,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <CssBaseline />
       <GoogleOAuthProvider clientId="719024491428-tbr6embr99rrrfvml3vdqpjdo35o9ghe.apps.googleusercontent.com">
         <QueryClientProvider client={queryClient}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </QueryClientProvider>
       </GoogleOAuthProvider>
     </ThemeProvider>
