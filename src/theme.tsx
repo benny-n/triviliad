@@ -2,20 +2,44 @@ import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
 // A custom theme for this app
-const liadTheme = createTheme({
+// const liadTheme = createTheme({
+//   direction: "rtl",
+//   palette: {
+//     primary: {
+//       main: "#cf9f00",
+//     },
+//     secondary: {
+//       main: "#19857b",
+//     },
+//     error: {
+//       main: red.A400,
+//     },
+//     background: {
+//       default: "#1d1d4b",
+//     },
+//     text: {
+//       primary: "#e9e9e9",
+//     },
+//   },
+//   typography: {
+//     fontFamily: "Assistant",
+//   },
+// });
+
+const orenTheme = createTheme({
   direction: "rtl",
   palette: {
     primary: {
-      main: "#cf9f00",
+      main: "#d84646",
     },
     secondary: {
-      main: "#19857b",
+      main: "#d84646",
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: "#1d1d4b",
+      default: "#2c2c2c",
     },
     text: {
       primary: "#e9e9e9",
@@ -26,38 +50,14 @@ const liadTheme = createTheme({
   },
 });
 
-const orenTheme = createTheme({
-  direction: "rtl",
-  palette: {
-    primary: {
-      main: "#cf9f00",
-    },
-    secondary: {
-      main: "#19857b",
-    },
-    error: {
-      main: red.A400,
-    },
-    background: {
-      default: "#1d1d4b",
-    },
-    text: {
-      primary: "#e9e9e9",
-    },
-  },
-  typography: {
-    fontFamily: "Brush Script MT",
-  },
-});
-
 export default function theme(person?: String) {
   if (person == "liad") {
-    return liadTheme
+    return orenTheme
   }
   else if (person == "oren") {
     return orenTheme
   } else {
-    return liadTheme
+    return orenTheme
   }
 }
 
