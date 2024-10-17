@@ -1,51 +1,49 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { CredentialResponse, useGoogleOneTapLogin } from "@react-oauth/google";
-import { jwtDecode } from "jwt-decode";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Redirect from "./Redirect";
 
-interface DecodedUser {
-  given_name: string;
-}
+// interface DecodedUser {
+//   given_name: string;
+// }
 
 export default function LandingPage() {
   const [header, setHeader] = useState<string>("האם אתה ליעד?");
   const [headerOpacity, setHeaderOpacity] = useState<number>(1);
   const [person, setPerson] = useState<String>("")
   const [isReady, setIsReady] = useState<boolean>(false);
-  const [isLiad, setIsLiad] = useState<boolean>(false);
-  const [credentialResponse, setCredentialResponse] =
-    useState<CredentialResponse | null>();
+  // const [isLiad, setIsLiad] = useState<boolean>(false);
+  // const [credentialResponse, setCredentialResponse] =
+  //   useState<CredentialResponse | null>();
   // const [triviaComplete, setTriviaComplete] = useState<boolean>(false);
   // const [statsData, setStatsData] = useState<StatsData>({ stats: [] });
 
-  useMemo(() => {
-    if (!credentialResponse?.credential) return;
-    let decoded = jwtDecode<DecodedUser>(credentialResponse.credential);
-    console.log(decoded)
-    let isActuallyLiad = decoded.given_name.toLowerCase().includes("benny");
-    setIsLiad(isActuallyLiad);
-  }, [credentialResponse]);
+  // useMemo(() => {
+  //   if (!credentialResponse?.credential) return;
+  //   let decoded = jwtDecode<DecodedUser>(credentialResponse.credential);
+  //   console.log(decoded)
+  //   // let isActuallyLiad = decoded.given_name.toLowerCase().includes("benny");
+  //   setIsLiad(false);
+  // }, [credentialResponse]);
 
-  useGoogleOneTapLogin({
-    cancel_on_tap_outside: false,
-    onSuccess: (credentialResponse) => {
-      setCredentialResponse(credentialResponse);
-    },
-    onError: () => {
-      console.log("Login Failed");
-    },
-  });
+  // useGoogleOneTapLogin({
+  //   cancel_on_tap_outside: false,
+  //   onSuccess: (credentialResponse) => {
+  //     setCredentialResponse(credentialResponse);
+  //   },
+  //   onError: () => {
+  //     console.log("Login Failed");
+  //   },
+  // });
 
   useEffect(() => {
-    if (!credentialResponse) return;
-    setTimeout(() => {
-      setHeaderOpacity(0);
-    });
+    // if (!credentialResponse) return;
+    // setTimeout(() => {
+    //   setHeaderOpacity(0);
+    // });
     setTimeout(() => {
       setHeaderOpacity(1);
-      if (isLiad) {
+      if (false) {
         setPerson("liad")
         setHeader("נראה שכן!");
       } else {
@@ -61,7 +59,8 @@ export default function LandingPage() {
       setHeader("הטריויליעדה");
       setIsReady(true);
     }, 2250);
-  }, [isLiad, credentialResponse]);
+  // }, [isLiad, credentialResponse]);
+  });
 
   document.cookie = "g_state=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
 

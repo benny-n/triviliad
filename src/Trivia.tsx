@@ -104,24 +104,27 @@ export default function Trivia(props: TriviaProps) {
       if (ENABLE_ADMIN) {
         setQuestions(query.data.questions);
       } else {
-        let indexOfFirstSunnyQuestion = query.data.questions.findIndex(
-          (question: TriviaQuestion) => question.who === "סאני"
-        );
-        setQuestions(
-          // shuffle all the list of questions from 2 to Sunny, but make sure that 8 and 9 remain adjacent
-          query.data.questions
-            .slice(0, 2)
-            .concat(
-              query.data.questions.slice(2, 8).sort(() => Math.random() - 0.5)
-            )
-            .concat(query.data.questions.slice(8, 10))
-            .concat(
-              query.data.questions
-                .slice(10, indexOfFirstSunnyQuestion)
-                .sort(() => Math.random() - 0.5)
-            )
-            .concat(query.data.questions.slice(indexOfFirstSunnyQuestion))
-        );
+        // let indexOfFirstSunnyQuestion = query.data.questions.findIndex(
+        //   (question: TriviaQuestion) => question.who === "סאני"
+        // );
+        // setQuestions(
+        //   // shuffle all the list of questions from 2 to Sunny, but make sure that 8 and 9 remain adjacent
+        //   query.data.questions
+        //     .slice(0, 2)
+        //     .concat(
+        //       query.data.questions.slice(2, 8).sort(() => Math.random() - 0.5)
+        //     )
+        //     .concat(query.data.questions.slice(8, 10))
+        //     .concat(
+        //       query.data.questions
+        //         .slice(10, indexOfFirstSunnyQuestion)
+        //         .sort(() => Math.random() - 0.5)
+        //     )
+        //     .concat(query.data.questions.slice(indexOfFirstSunnyQuestion))
+        // );
+        
+        // JUST SHUFFLE LIKE A NORMAL PERSON
+        setQuestions(query.data.questions.sort(() => Math.random() - 0.5));
       }
       if (currentQuestionIndex < 0) {
         setCurrentQuestionIndex(0);
@@ -158,7 +161,7 @@ export default function Trivia(props: TriviaProps) {
     <Container maxWidth="sm">
       {playTicking && (
         <audio autoPlay>
-          <source src={`${person}_res/ahuzon_elion.mp3`} type="audio/mpeg" />
+          <source src={`${person}_res/${Math.floor(Math.random() * 8)}.mpeg`} type="audio/mpeg" />
         </audio>
       )}
       {playYouWin && (
@@ -254,7 +257,7 @@ export default function Trivia(props: TriviaProps) {
                         sx={{
                           mb: 1,
                           "&:disabled": {
-                            backgroundColor: "#836400",
+                            backgroundColor: "#b34040",
                           },
                         }}
                         disabled={answeredQuestion}
@@ -354,7 +357,7 @@ export default function Trivia(props: TriviaProps) {
                       strokeWidth={15}
                       duration={30}
                       size={timerSize}
-                      colors={["#cf9f00", "#cf9f00", "#A30000", "#A30000"]}
+                      colors={["#ff7171", "#ff5858", "#A30000", "#A30000"]}
                       colorsTime={[30, 10, 5, 0]}
                       onComplete={(_) => {
                         setAnsweredQuestion(true);
@@ -434,7 +437,9 @@ export default function Trivia(props: TriviaProps) {
                     setTimer(false);
                     setTimerOpacity(1);
                     muteAllAudio();
+                    console.log("here", currentQuestionIndex, questions.length);
                     if (currentQuestionIndex >= questions.length - 1) {
+                      console.log("should navigate");
                       navigate("/stats");
                     } else {
                       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);

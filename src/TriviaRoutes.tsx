@@ -9,6 +9,7 @@ import {
 import { StatsData } from "./types";
 import { ThemeProvider } from "@emotion/react";
 import theme from "./theme";
+import { CssBaseline } from "@mui/material";
 
 export default function TriviaRoutes() {
   const [statsData, setStatsData] = useState<StatsData>({ stats: [] });
@@ -24,6 +25,7 @@ export default function TriviaRoutes() {
       }/>
       <Route path="/oren" element={
         <ThemeProvider theme={theme("oren")}>
+        <CssBaseline />
           <Trivia
             statsData={statsData}
             setStatsData={setStatsData}
