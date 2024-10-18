@@ -9,6 +9,7 @@
     {
       "question": "איך אורן התחיל עם מישהי במרכז הכרמל?",
       "who": "ליעד",
+      "photo": "mathil.jpg",
       "answers": ["את באה לגאלה במקום?", "תדלקת לפני?", "חם פה בטירוף אין קרח לשבור", "אז מה, רמזור?"],
       "correct": 3
     },
@@ -26,6 +27,7 @@
     {
       "question": "אורן ואור הכירו ב",
       "who": "נאור",
+      "photo": "oren_or.jpg",
       "answers": [
           "גריינדר",
           "World of warcraft",
@@ -37,6 +39,7 @@
     {
       "question": "אורן עבד ב",
       "who": "איתן",
+      "photo": "haluk.jpg",
       "answers": [
         "נקסון",
         "בליזארד",
@@ -48,6 +51,7 @@
     {
       "question": "בגלל מי העפנו את אלדר מהקבוצה?",
       "who": "נאור",
+      "photo": "eldar.jpg",
       "answers": [
           "נאור",
           "רוני",
@@ -59,6 +63,7 @@
     {
       "question": "איך קוראים לאורן בטלפון של נאור",
       "who": "נ.ח.",
+      "photo": "orenokoreno.jpg",
       "answers": [
           "א.ק.",
           "אורן",
@@ -70,6 +75,7 @@
     {
       "question": "מי עשה לבני עגורן בבית ספר וקיבל בוקס לפנים",
       "who": "נאור",
+      "photo": "purim.jpg",
       "answers": [
           "תום לב",
           "רותם",
@@ -92,6 +98,7 @@
     {
       "question": "אורן הפסיק לבוא ליציאות אחרי שהדבר הבא קרה",
       "who": "שי",
+      "photo": "syrup.jpg",
       "answers": [
           "דפקנו אלדר לאלדר",
           "הפסקנו לצאת למועדונים",
@@ -103,6 +110,8 @@
     {
       "question": "באיזו פעילות אורן שבר אצבע",
       "who": "שי",
+      "photo": "ski.jpg",
+      "hasPhotoAnswer": true,
       "answers": [
           "סקי",
           "כדוסל",
@@ -136,6 +145,7 @@
     {
       "question": "איזה קעקוע הכי מביך?",
       "who": "חן",
+      "photo": "chen.jpg",
       "answers": [
           "פרי הפלטיפוס",
           "ארכיטקטס",
@@ -147,6 +157,7 @@
     {
       "question": "מה הכי חשוב כשעושים רייד",
       "who": "חן",
+      "photo": "pedro.jpg",
       "answers": [
           "להנות",
           "לא לפתוח את הדלת לשליחים",
@@ -169,6 +180,7 @@
     {
       "question": "איזו חיה גנבה לגרישה את המפתחות לבית של שחף ואיתן?",
       "who": "איתן",
+      "photo": "grisha.jpg",
       "answers": [
           "סנואו",
           "פלוצה",
@@ -180,6 +192,7 @@
     {
       "question": "כמה אופציות יש לבילדים של סקילים ב-DLA?",
       "who": "איתן",
+      "photo": "options.jpg",
       "answers": [
           "25",
           "625",
@@ -268,6 +281,7 @@
     {
       "question": "מי הכי אכזב אותך בפרוייקטים שעשית יחד עם אנשים",
       "who": "גרישה",
+      "photo": "mad.jpg",
       "answers": [
           "איליה",
           "ליעד",
@@ -312,6 +326,7 @@
     {
       "question": "מי כן שיחק ב-DLA",
       "who": "שי",
+      "photo": "dla.jpg",
       "answers": [
           "גרישה",
           "נאור",
@@ -323,6 +338,7 @@
     {
       "question": "כמה אנשים שיחקו ב-peak של DLA playtest",
       "who": "איליה",
+      "photo": "stats.jpg",
       "answers": [
           "1",
           "3",
@@ -334,6 +350,8 @@
     {
       "question": "מי שיחק הכי הרבה ב-DLA",
       "who": "נאור",
+      "photo": "mvp.jpg",
+      "hasPhotoAnswer": true,
       "answers": [
           "ליעד",
           "איתן",
@@ -345,6 +363,8 @@
     {
       "question": "מה ה-achievement הכי נדיר ב-don't lose aggro?",
       "who": "איליה",
+      "photo": "ach.jpg",
+      "hasPhotoAnswer": true,
       "answers": [
           "Play for an hour",
           "Sacrifice",
@@ -367,6 +387,7 @@
     {
       "question": "מה הפחד הכי גדול של אורן",
       "who": "אור",
+      "photo": "life_choices.jpg",
       "answers": [
           "דבורים",
           "טילים",
@@ -389,6 +410,7 @@
     {
       "question": "מה היה המשפט פתיחה של אורן כשהתלחיל עם אור באפליקציה?",
       "who": "אור",
+      "photo": "oren_or2.jpg",
       "answers": [
           "?היי, מה שלומך",
           "היי, את שומעת מטאל?",
