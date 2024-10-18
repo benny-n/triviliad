@@ -107,6 +107,9 @@ export default function Trivia(props: TriviaProps) {
         // let indexOfFirstSunnyQuestion = query.data.questions.findIndex(
         //   (question: TriviaQuestion) => question.who === "סאני"
         // );
+        let indexOfFirstOrQuestion = query.data.questions.findIndex(
+          (question: TriviaQuestion) => question.who === "אור"
+        );
         // setQuestions(
         //   // shuffle all the list of questions from 2 to Sunny, but make sure that 8 and 9 remain adjacent
         //   query.data.questions
@@ -124,7 +127,15 @@ export default function Trivia(props: TriviaProps) {
         // );
         
         // JUST SHUFFLE LIKE A NORMAL PERSON
-        setQuestions(query.data.questions.sort(() => Math.random() - 0.5));
+        // setQuestions(query.data.questions.sort(() => Math.random() - 0.5));
+
+        // shuffle all the list of questions until the first Or question
+        setQuestions(
+          query.data.questions
+            .slice(0, indexOfFirstOrQuestion)
+            .sort(() => Math.random() - 0.5)
+            .concat(query.data.questions.slice(indexOfFirstOrQuestion))
+        );
       }
       if (currentQuestionIndex < 0) {
         setCurrentQuestionIndex(0);
