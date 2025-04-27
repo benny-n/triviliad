@@ -295,7 +295,8 @@
           "פליז שיחזור עומד על הרגליים"
         ],
         "correct": 0,
-        "photo": "strip.jpg"
+        "photo": "strip.jpg",
+        "hasPhotoAnswer": true
       },
       {
         "question": "מה הכי מרגיז אותה שאתה עושה בלי לשים לב?",
