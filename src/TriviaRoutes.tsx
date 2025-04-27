@@ -33,6 +33,16 @@ export default function TriviaRoutes() {
           />
         </ThemeProvider>
       }/>
+      <Route path="/praimo" element={
+        <ThemeProvider theme={theme("praimo")}>
+        <CssBaseline />
+          <Trivia
+            statsData={statsData}
+            setStatsData={setStatsData}
+            person="praimo"
+          />
+        </ThemeProvider>
+      }/>
       <Route path="/stats" element={<Stats data={statsData} /> } />
     </Routes>
   );

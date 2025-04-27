@@ -107,8 +107,11 @@ export default function Trivia(props: TriviaProps) {
         // let indexOfFirstSunnyQuestion = query.data.questions.findIndex(
         //   (question: TriviaQuestion) => question.who === "סאני"
         // );
+        // let indexOfFirstOrQuestion = query.data.questions.findIndex(
+        //   (question: TriviaQuestion) => question.who === "אור"
+        // );
         let indexOfFirstOrQuestion = query.data.questions.findIndex(
-          (question: TriviaQuestion) => question.who === "אור"
+          (question: TriviaQuestion) => question.who === "אינה"
         );
         // setQuestions(
         //   // shuffle all the list of questions from 2 to Sunny, but make sure that 8 and 9 remain adjacent
@@ -172,7 +175,7 @@ export default function Trivia(props: TriviaProps) {
     <Container maxWidth="sm">
       {playTicking && (
         <audio autoPlay>
-          <source src={`${person}_res/${Math.floor(Math.random() * 8)}.mpeg`} type="audio/mpeg" />
+          <source src={`${person}_res/${Math.floor(Math.random() * 9)}.mp3`} type="audio/mpeg" />
         </audio>
       )}
       {playYouWin && (
