@@ -46,9 +46,12 @@ export default function LandingPage() {
       if (false) {
         setPerson("liad")
         setHeader("נראה שכן!");
-      } else {
+      } else if (false) {
         setPerson("oren")
         setHeader("נראה שלא!");
+      } else {
+        setPerson("praimo")
+        setHeader("נראה שכן!");
       }
     }, 500);
     setTimeout(() => {
