@@ -281,8 +281,8 @@ export default function Trivia(props: TriviaProps) {
                             let newQuestions = [...questions];
                             newQuestions[currentQuestionIndex].photo =
                               newQuestions[currentQuestionIndex].photo?.replace(
-                                ".jpg",
-                                "_answer.jpg"
+                                ".jp",
+                                "_answer.jp"
                               );
                             setQuestions(newQuestions);
                           }

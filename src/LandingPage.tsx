@@ -51,7 +51,7 @@ export default function LandingPage() {
         setHeader("נראה שלא!");
       } else {
         setPerson("praimo")
-        setHeader("נראה שכן!");
+        setHeader("נראה שלא!");
       }
     }, 500);
     setTimeout(() => {
